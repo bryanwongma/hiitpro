@@ -7,6 +7,14 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="HIIT Pro">
+    <!-- ตั้งค่า PWA & App Icon -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#090d16">
+    <link rel="icon" type="image/svg+xml" href="./icon.svg">
+    <link rel="apple-touch-icon" href="./icon.svg">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="HIIT Pro">
     <title>HIIT Pro — Mobile Workout Timer</title>
 
     <!-- Google Fonts: Kanit & JetBrains Mono -->
@@ -1086,6 +1094,14 @@
         window.onload = function () {
             renderSetup();
         };
+        // ลงทะเบียน Service Worker สำหรับใช้งาน Offline
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('PWA Offline Ready!', reg.scope))
+            .catch(err => console.error('PWA Error:', err));
+        });
+      }
     </script>
 </body>
 </html>
