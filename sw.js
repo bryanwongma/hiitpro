@@ -1,43 +1,48 @@
-const CACHE_NAME = 'hiit-pwa-v1';
-const ASSETS_TO_CACHE = [
+const CACHE_NAME = 'hiit-pro-offline-v2';
+const CORE_ASSETS = [
   './',
   './index.html',
   './manifest.json',
   './icon.svg'
 ];
 
-// 1. ติดตั้ง Service Worker และบันทึกไฟล์ลงเครื่อง (Cache)
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
-    })
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS))
   );
   self.skipWaiting();
 });
 
-// 2. ลบ Cache เก่าทิ้งเมื่อมีการอัปเดตเวอร์ชันใหม่
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
-      );
-    })
+    caches.keys().then((keys) =>
+      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
+    )
   );
   self.clients.claim();
 });
 
-// 3. ดึงไฟล์จาก Cache มาแสดงผลเมื่อ Offline
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      return cachedResponse || fetch(event.request).then((networkResponse) => {
-        return caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, networkResponse.clone());
-          return networkResponse;
+    caches.match(event.request).then((cached) => {
+      if (cached) return cached;
+
+      return fetch(event.request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+          }
+          return response;
+        })
+        .catch(() => {
+          // กรณี Offline และเรียกหน้าหลักของเว็บ ให้ส่ง index.html กลับไปเสมอ
+          if (event.request.mode === 'navigate') {
+            return caches.match('./index.html');
+          }
         });
-      });
     })
   );
 });
