@@ -1,9 +1,11 @@
-const CACHE_NAME = 'hiit-pro-offline-v2';
+const CACHE_NAME = 'hiit-pro-offline-v3';
 const CORE_ASSETS = [
   './',
   './index.html',
   './manifest.json',
-  './icon.svg'
+  './icon.svg',
+  './icon-192.png',
+  './icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -38,7 +40,6 @@ self.addEventListener('fetch', (event) => {
           return response;
         })
         .catch(() => {
-          // กรณี Offline และเรียกหน้าหลักของเว็บ ให้ส่ง index.html กลับไปเสมอ
           if (event.request.mode === 'navigate') {
             return caches.match('./index.html');
           }
