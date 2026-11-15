@@ -1,12 +1,12 @@
 {
   "name": "HIIT Pro Workout Timer",
   "short_name": "HIIT Pro",
-  "description": "แอปจับเวลาออกกำลังกายแบบ HIIT ใช้งานออฟไลน์ได้",
+  "description": "High-Intensity Interval Training workout timer with offline support.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#090d16",
+  "background_color": "#0b101d",
   "theme_color": "#10b981",
-  "orientation": "portrait",
+  "orientation": "any",
   "icons": [
     {
       "src": "./icon.svg",
