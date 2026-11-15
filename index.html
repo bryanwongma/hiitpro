@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="th" class="dark">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -18,7 +18,7 @@
     <!-- Google Fonts (Optional enhancement when online, gracefully falls back offline) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700;800&family=Kanit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
 
     <style>
         /* =========================================================
@@ -55,7 +55,7 @@
             overflow: hidden;
             background-color: var(--bg-main);
             color: var(--text-main);
-            font-family: 'Kanit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         .font-mono {
@@ -216,7 +216,7 @@
         }
 
         /* Section Subheader */
-        .section-Row {
+        .section-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -601,9 +601,9 @@
 
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
                     <button id="btnInstallPwa" onclick="installPWA()" class="pwa-install-btn hidden">
-                        ติดตั้งแอป
+                        Install App
                     </button>
-                    <button onclick="toggleSound()" class="icon-btn" title="เปิด/ปิดเสียง">
+                    <button onclick="toggleSound()" class="icon-btn" title="Toggle Sound">
                         <svg class="icon-sound-on" width="18" height="18" fill="none" stroke="#34d399" stroke-width="2.2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
                         </svg>
@@ -620,24 +620,24 @@
                 <div>
                     <label for="selectCircuit" class="field-label">Circuit</label>
                     <select id="selectCircuit" onchange="onCircuitChange(this.value)">
-                        <option value="5" selected>5 ท่า</option>
-                        <option value="6">6 ท่า</option>
-                        <option value="7">7 ท่า</option>
-                        <option value="8">8 ท่า</option>
+                        <option value="5" selected>5 Moves</option>
+                        <option value="6">6 Moves</option>
+                        <option value="7">7 Moves</option>
+                        <option value="8">8 Moves</option>
                     </select>
                 </div>
 
                 <div>
-                    <label for="selectSets" class="field-label">Set</label>
+                    <label for="selectSets" class="field-label">Sets</label>
                     <select id="selectSets" onchange="onSetChange(this.value)">
-                        <option value="3" selected>3 เซต</option>
-                        <option value="4">4 เซต</option>
-                        <option value="5">5 เซต</option>
+                        <option value="3" selected>3 Sets</option>
+                        <option value="4">4 Sets</option>
+                        <option value="5">5 Sets</option>
                     </select>
                 </div>
 
                 <div>
-                    <label for="selectRatio" class="field-label">Time</label>
+                    <label for="selectRatio" class="field-label">Time (s)</label>
                     <select id="selectRatio" onchange="onRatioChange(this.value)" class="font-mono" style="color: #fbbf24;">
                         <option value="30:30">30 : 30</option>
                         <option value="40:20" selected>40 : 20</option>
@@ -648,12 +648,12 @@
             </div>
 
             <!-- 2. Selection Subheader -->
-            <div class="section-Row">
+            <div class="section-row">
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    <span style="font-size: clamp(0.78rem, 1.5vw, 0.95rem); font-weight: 700; color: #cbd5e1;">เลือกท่าออกกำลังกาย</span>
+                    <span style="font-size: clamp(0.78rem, 1.5vw, 0.95rem); font-weight: 700; color: #cbd5e1;">Select Exercises</span>
                     <span id="selectionBadge" class="badge-pill badge-emerald font-mono">5/5</span>
                 </div>
-                <button onclick="resetDefaultSelection()" class="reset-btn">รีเซ็ตค่าเริ่มต้น</button>
+                <button onclick="resetDefaultSelection()" class="reset-btn">Reset Default</button>
             </div>
 
             <!-- 3. 4x4 Exercise Grid (Fills remaining height evenly) -->
@@ -667,7 +667,7 @@
                     </svg>
                     <span id="btnStartText">START WORKOUT</span>
                 </div>
-                <span id="totalTimeBadge" class="time-badge font-mono">15:00 นาที</span>
+                <span id="totalTimeBadge" class="time-badge font-mono">15:00 MIN</span>
             </button>
         </section>
 
@@ -679,7 +679,7 @@
             <!-- Top Progress & Navigation -->
             <div style="display: flex; flex-direction: column; gap: 0.65rem; flex-shrink: 0;">
                 <div class="top-bar">
-                    <button onclick="stopWorkoutToSetup()" class="icon-btn" title="กลับหน้าตั้งค่า">
+                    <button onclick="stopWorkoutToSetup()" class="icon-btn" title="Back to Setup">
                         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
                         </svg>
@@ -691,7 +691,7 @@
                         <span style="color: var(--emerald-light);">MOVE <span id="liveMove">1/5</span></span>
                     </div>
 
-                    <button onclick="toggleSound()" class="icon-btn" title="เปิด/ปิดเสียง">
+                    <button onclick="toggleSound()" class="icon-btn" title="Toggle Sound">
                         <svg class="icon-sound-on" width="20" height="20" fill="none" stroke="#34d399" stroke-width="2.2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
                         </svg>
@@ -719,7 +719,7 @@
 
                     <div>
                         <div id="nextUpLabel" class="hidden" style="font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--sky);">
-                            ช่วงพัก • เตรียมท่าถัดไป
+                            REST • UP NEXT
                         </div>
                         <h2 id="activeExerciseName" class="active-ex-title">Jump Squat</h2>
                     </div>
@@ -733,7 +733,7 @@
                     <!-- 3-Second Countdown Overlay -->
                     <div id="countdownOverlay" class="countdown-overlay hidden">
                         <span id="countdownHint" style="font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #fecdd3; margin-bottom: 0.25rem;">
-                            เตรียมเริ่มท่าใหม่!
+                            GET READY!
                         </span>
                         <span id="countdownNum" class="countdown-num font-mono count-pop">3</span>
                     </div>
@@ -742,7 +742,7 @@
 
             <!-- Bottom Controls -->
             <div class="workout-controls">
-                <button onclick="prevStep()" class="ctrl-btn" title="ย้อนกลับ">
+                <button onclick="prevStep()" class="ctrl-btn" title="Previous Step">
                     <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
                     </svg>
@@ -758,7 +758,7 @@
                     <span id="pauseText">PAUSE</span>
                 </button>
 
-                <button onclick="skipStep()" class="ctrl-btn" title="ข้าม">
+                <button onclick="skipStep()" class="ctrl-btn" title="Skip Step">
                     <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
                     </svg>
@@ -778,13 +778,13 @@
 
             <div style="margin: 1rem 0 1.5rem;">
                 <span style="font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; color: var(--emerald-light);">COMPLETED</span>
-                <h2 style="font-size: 1.75rem; font-weight: 800; color: #ffffff; margin: 0.25rem 0;">ฝึกสำเร็จครบเซต!</h2>
-                <p id="doneSummaryText" class="font-mono" style="font-size: 0.85rem; color: var(--text-muted);">5 ท่า × 3 เซต • 40:20</p>
+                <h2 style="font-size: 1.75rem; font-weight: 800; color: #ffffff; margin: 0.25rem 0;">Workout Complete!</h2>
+                <p id="doneSummaryText" class="font-mono" style="font-size: 0.85rem; color: var(--text-muted);">5 Moves × 3 Sets • 40:20</p>
             </div>
 
             <div style="width: 100%; max-width: 360px; display: flex; flex-direction: column; gap: 0.65rem;">
-                <button onclick="startWorkout()" class="start-btn" style="justify-content: center;">เล่นซ้ำอีกครั้ง</button>
-                <button onclick="stopWorkoutToSetup()" class="ctrl-btn" style="width: 100%;">กลับหน้าแรก</button>
+                <button onclick="startWorkout()" class="start-btn" style="justify-content: center;">REPEAT WORKOUT</button>
+                <button onclick="stopWorkoutToSetup()" class="ctrl-btn" style="width: 100%;">BACK TO HOME</button>
             </div>
         </section>
 
@@ -1200,7 +1200,7 @@
 
             const totalIntervals = state.circuitCount * state.setCount;
             const totalSecs = totalIntervals * (state.workSec + state.restSec);
-            document.getElementById('totalTimeBadge').textContent = `${formatMMSS(totalSecs)} นาที`;
+            document.getElementById('totalTimeBadge').textContent = `${formatMMSS(totalSecs)} MIN`;
 
             const grid = document.getElementById('exerciseGrid');
             grid.innerHTML = EXERCISES_DB.map(ex => {
@@ -1381,7 +1381,7 @@
                 animStage.classList.add('urgent-alert');
                 countdownOverlay.classList.remove('hidden');
                 countdownNum.textContent = state.timeLeft;
-                countdownHint.textContent = step.type === 'WORK' ? 'เตรียมพัก!' : `เริ่ม ${step.exercise.name}!`;
+                countdownHint.textContent = step.type === 'WORK' ? 'REST IN...' : `START ${step.exercise.name.toUpperCase()}!`;
             } else {
                 animStage.classList.remove('urgent-alert');
                 countdownOverlay.classList.add('hidden');
@@ -1421,7 +1421,7 @@
             releaseWakeLock();
 
             document.getElementById('doneSummaryText').textContent =
-                `${state.circuitCount} ท่า × ${state.setCount} เซต • ${state.workSec}:${state.restSec}`;
+                `${state.circuitCount} Moves × ${state.setCount} Sets • ${state.workSec}:${state.restSec}`;
 
             document.getElementById('workoutView').classList.add('hidden');
             document.getElementById('completeView').classList.remove('hidden');
